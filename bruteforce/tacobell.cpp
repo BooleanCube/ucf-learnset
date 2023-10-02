@@ -13,16 +13,17 @@ int main() {
         vector<string> food(n);
         for(int i=0; i<n; i++) cin >> food[i];
         sort(begin(food), end(food));
+        vector<string> ans = vector<string>();
         for(int mask=(1<<m)-1; mask<(1<<n); mask=next_mask(mask)) {
-            vector<string> out;
+            string out = "";
             for(int i=0; i<n; i++) {
-                if((mask & (1<<i)) == (1<<i))
-                    out.push_back(food[i]);
+                if((mask & (1<<i)) > 0)
+                    out += food[i] + " ";
             }
-            for(int j=0; j<m-1; j++)
-                cout << out[j] << " ";
-            cout << out[m-1] << endl;
+            ans.push_back(out);
         }
+        sort(begin(ans), end(ans));
+        for(string line : ans) cout << line << endl;
         cout << endl;
     }
     return 0;
